@@ -2,10 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 This project uses the following packages:
 
-**React 16.13.0 with Hooks**
-**React Router 5.1.2 with Hooks**
-**Formik 2.1.4 and Yup 0.28.3 with Hooks**
-**React Material UI 4.9.5**
+**React 16.13.0 with Hooks**  
+**React Router 5.1.2 with Hooks**  
+**Formik 2.1.4 and Yup 0.28.3 with Hooks**  
+**React Material UI 4.9.5**  
 
 This project integrates with the fake backend, which is available at:
 [BackEnd](https://github.com/lwazevedo/fake-api-jwt-json-server)
