@@ -1,6 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import Link from '@material-ui/core/Link';
+import {Typography, Link} from '@material-ui/core';
+
 
 const Copyright = ({ text, date, align, variant, color }) => (
   <Typography variant={variant} color={color} align={align}>
