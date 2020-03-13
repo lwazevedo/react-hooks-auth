@@ -8,6 +8,7 @@ import {
 import './App.css';
 import { SignInSide, Dash, NoMatch, PrivateRouter, Home } from './components/index';
 import AuthState from './context/authContext/AuthState';
+import Container from './layouts/Container';
 
 function App() {
   return (
@@ -15,9 +16,13 @@ function App() {
       <Router>
         <Switch>
           <Route exact path='/login' component={SignInSide} />
-          <PrivateRouter exact path='/' component={Home} />
-          <PrivateRouter exact path='/dash' component={Dash} />
-          <Route path="*" component={NoMatch} />
+          <Container>
+            <Switch>
+              <PrivateRouter exact path='/' component={Home} />
+              <PrivateRouter exact path='/dash' component={Dash} />
+              <Route path="*" component={NoMatch} />
+            </Switch>
+          </Container>
         </Switch>
       </Router>
     </AuthState>
