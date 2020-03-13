@@ -8,16 +8,16 @@ import Alert from '@material-ui/lab/Alert';
 
 import { useFormik } from 'formik';
 
-import AuthContext from '../../context/authContext/AuthContext';
+import AuthContext from '../../../context/authContext/AuthContext';
 
 import SignInStyle from './SignInStyle';
 import SignInFormSchema from './SignInFormSchema';
-import Copyright from '../copyright/Copyright';
+import Copyright from '../../copyright/Copyright';
 
 
 
 const SignInSide = () => {
-  const { login, isAuthencated, setIsAuthencated, error } = useContext(AuthContext);
+  const { login, error, userAuthencated } = useContext(AuthContext);
   const classes = SignInStyle();
   const history = useHistory();
   const formik = useFormik({
@@ -26,12 +26,12 @@ const SignInSide = () => {
       password: '',
     },
     validationSchema: SignInFormSchema,
-    onSubmit: values => {
-      login(values)
-      if (!error) history.push('/dash');
-    },
+    onSubmit: values => login(values)
   });
 
+  useEffect(() => {
+    if (userAuthencated()) history.push('/')
+  }, [history, userAuthencated])
 
   return (<Grid container component="main" className={classes.root}>
     <CssBaseline />

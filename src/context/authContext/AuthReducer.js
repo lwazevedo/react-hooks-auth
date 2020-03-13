@@ -1,21 +1,20 @@
 import { LOGIN_FAIL, LOGIN_SUCCESS, SET_ISAUTHENCATED } from '../types'
+import { setDataUser, removeDataUser } from '../../utils/localUserService';
 
 export default (state, { type, payload }) => {
   switch (type) {
     case LOGIN_SUCCESS:
-      localStorage.setItem('dataUser', payload)
+      setDataUser(payload);
       return {
         ...state,
         ...payload,
-        isAuthencated: true,
         loading: false,
         error: null
       }
     case LOGIN_FAIL:
-      localStorage.removeItem('dataUser')
+      removeDataUser();
       return {
         ...state,
-        isAuthencated: null,
         user: null,
         token: null,
         loading: false,

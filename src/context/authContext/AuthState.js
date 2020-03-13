@@ -5,13 +5,12 @@ import AuthReducer from './AuthReducer'
 import AuthContext from './AuthContext';
 
 
-import { LOGIN_FAIL, LOGIN_SUCCESS, SET_ISAUTHENCATED } from '../types';
-
+import { LOGIN_FAIL, LOGIN_SUCCESS } from '../types';
+import { getDataUser, removeDataUser } from '../../utils/localUserService';
 
 const AuthState = (props) => {
   const initialState = {
-    ...localStorage.getItem('dataUser'),
-    isAuthencated: null,
+    ...getDataUser(),
     loading: null,
     error: null
   }
@@ -29,10 +28,11 @@ const AuthState = (props) => {
     }
   }
 
-  const setIsAuthencated = (value) => dispatch({ type: SET_ISAUTHENCATED, payload: value })
+  const userAuthencated = () => Boolean(getDataUser());
+  const logout = () => removeDataUser();
 
   return (
-    <AuthContext.Provider value={{ login, setIsAuthencated, ...state }}>
+    <AuthContext.Provider value={{ login, logout, userAuthencated, ...state }}>
       {props.children}
     </AuthContext.Provider>
   )

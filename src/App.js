@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 
 import './App.css';
-import { SignInSide, Dash, NoMatch, PrivateRouter } from './components/index';
+import { SignInSide, Dash, NoMatch, PrivateRouter, Home } from './components/index';
 import AuthState from './context/authContext/AuthState';
 
 function App() {
@@ -14,7 +14,8 @@ function App() {
     <AuthState>
       <Router>
         <Switch>
-          <Route exact path='/' component={SignInSide} />
+          <Route exact path='/login' component={SignInSide} />
+          <PrivateRouter exact path='/' component={Home} />
           <PrivateRouter exact path='/dash' component={Dash} />
           <Route path="*" component={NoMatch} />
         </Switch>
