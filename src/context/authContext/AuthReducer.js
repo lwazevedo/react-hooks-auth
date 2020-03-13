@@ -1,4 +1,4 @@
-import { LOGIN_FAIL, LOGIN_SUCCESS, SET_ISAUTHENCATED } from '../types'
+import { LOGIN_FAIL, LOGIN_SUCCESS, UPDATE_CONTEXT_AUTH } from '../types'
 import { setDataUser, removeDataUser } from '../../utils/localUserService';
 
 export default (state, { type, payload }) => {
@@ -20,10 +20,12 @@ export default (state, { type, payload }) => {
         loading: false,
         error: payload
       }
-    case SET_ISAUTHENCATED:
+    case UPDATE_CONTEXT_AUTH:
       return {
         ...state,
-        isAuthencated: payload
+        ...payload,
+        loading: false,
+        error: null
       }
     default:
       return state

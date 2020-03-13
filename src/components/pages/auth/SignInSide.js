@@ -29,6 +29,7 @@ const SignInSide = () => {
     onSubmit: values => login(values)
   });
 
+  
   useEffect(() => {
     if (userAuthencated()) history.push('/')
   }, [history, userAuthencated])

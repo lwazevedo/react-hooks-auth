@@ -11,7 +11,7 @@ const Home = () => {
 
   const onLogout = () => {
     logout();
-    history.push('/');
+    history.push('/login');
   }
   return (
     <>

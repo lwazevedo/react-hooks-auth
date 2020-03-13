@@ -1,12 +1,12 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useEffect } from 'react';
+
 
 import fakeApi from '../../apis/calls';
 import AuthReducer from './AuthReducer'
 import AuthContext from './AuthContext';
 
-
-import { LOGIN_FAIL, LOGIN_SUCCESS } from '../types';
-import { getDataUser, removeDataUser } from '../../utils/localUserService';
+import { LOGIN_FAIL, LOGIN_SUCCESS, UPDATE_CONTEXT_AUTH } from '../types';
+import { getDataUser, removeDataUser, getRoles } from '../../utils/localUserService';
 
 const AuthState = (props) => {
   const initialState = {
@@ -15,6 +15,11 @@ const AuthState = (props) => {
     error: null
   }
   const [state, dispatch] = useReducer(AuthReducer, initialState);
+
+  useEffect(() => {
+    const userLogddin = getDataUser();
+    if (userLogddin) dispatch({ type: UPDATE_CONTEXT_AUTH, payload: userLogddin })
+  }, [])
 
   const login = async data => {
     try {
@@ -30,9 +35,10 @@ const AuthState = (props) => {
 
   const userAuthencated = () => Boolean(getDataUser());
   const logout = () => removeDataUser();
+  const userRoles = () => getRoles();
 
   return (
-    <AuthContext.Provider value={{ login, logout, userAuthencated, ...state }}>
+    <AuthContext.Provider value={{ login, logout, userAuthencated, userRoles, ...state }}>
       {props.children}
     </AuthContext.Provider>
   )
