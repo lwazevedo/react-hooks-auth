@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from "react-router-dom";
 
 import { Avatar, Button, CssBaseline, TextField, Link, Paper, Box, Grid, Typography } from '@material-ui/core';
@@ -8,12 +8,16 @@ import Alert from '@material-ui/lab/Alert';
 
 import { useFormik } from 'formik';
 
+import AuthContext from '../../context/authContext/AuthContext';
+
 import SignInStyle from './SignInStyle';
 import SignInFormSchema from './SignInFormSchema';
-import Copyright from '../Copyright/Copyright';
+import Copyright from '../copyright/Copyright';
+
 
 
 const SignInSide = () => {
+  const { login, isAuthencated, setIsAuthencated, error } = useContext(AuthContext);
   const classes = SignInStyle();
   const history = useHistory();
   const formik = useFormik({
@@ -23,9 +27,8 @@ const SignInSide = () => {
     },
     validationSchema: SignInFormSchema,
     onSubmit: values => {
-      history.push('/dash');
-      // alert(JSON.stringify(values, null, 2));
-
+      login(values)
+      if (!error) history.push('/dash');
     },
   });
 
@@ -91,6 +94,9 @@ const SignInSide = () => {
               </Link>
             </Grid>
           </Grid>
+          {error && (<Box mt={2}>
+            <Alert variant="outlined" severity="error">{error.message}</Alert>
+          </Box>)}
           <Box mt={5}>
             <Copyright text="Your Website" date={new Date().getFullYear()} variant="body2" color="textSecondary" align="center" />
           </Box>

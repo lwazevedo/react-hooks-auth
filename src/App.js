@@ -6,18 +6,20 @@ import {
 } from "react-router-dom";
 
 import './App.css';
-import { SignInSide, Dash, NoMatch, PrivateRouter } from './Components/index';
-
+import { SignInSide, Dash, NoMatch, PrivateRouter } from './components/index';
+import AuthState from './context/authContext/AuthState';
 
 function App() {
   return (
-    <Router>
-      <Switch>
-        <Route exact path='/' component={SignInSide} />
-        <PrivateRouter exact path='/dash' component={Dash} />
-        <Route path="*" component={NoMatch} />
-      </Switch>
-    </Router>
+    <AuthState>
+      <Router>
+        <Switch>
+          <Route exact path='/' component={SignInSide} />
+          <PrivateRouter exact path='/dash' component={Dash} />
+          <Route path="*" component={NoMatch} />
+        </Switch>
+      </Router>
+    </AuthState>
   );
 }
 
