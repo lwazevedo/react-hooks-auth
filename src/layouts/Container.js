@@ -6,6 +6,7 @@ import { useMediaQuery } from '@material-ui/core';
 
 
 import TopBar from './components/TopBar';
+import SideBar from './components/SideBar/SideBar';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -32,18 +33,18 @@ const Container = (props) => {
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true
   });
-  
+
   const [openSidebar, setOpenSidebar] = useState(false);
 
   const handleSidebarOpen = () => {
     setOpenSidebar(true);
   };
 
-  // const handleSidebarClose = () => {
-  //   setOpenSidebar(false);
-  // };
+  const handleSidebarClose = () => {
+    setOpenSidebar(false);
+  };
 
-  // const shouldOpenSidebar = isDesktop ? true : openSidebar;
+  const shouldOpenSidebar = isDesktop ? true : openSidebar;
 
 
   return (
@@ -52,6 +53,9 @@ const Container = (props) => {
       [classes.shiftContent]: isDesktop
     })}>
       <TopBar onSidebarOpen={handleSidebarOpen} />
+      <SideBar onClose={handleSidebarClose}
+        open={shouldOpenSidebar}
+        variant={isDesktop ? 'persistent' : 'temporary'} />
       <main className={classes.content}>
         {children}
       </main>
