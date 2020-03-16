@@ -1,5 +1,5 @@
 import React, { forwardRef } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink, useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -49,7 +49,7 @@ const CustomRouterLink = forwardRef((props, ref) => (
 
 const SidebarNav = props => {
   const { pages, className, ...rest } = props;
-
+  const location = useLocation();
   const classes = useStyles();
 
   return (
@@ -64,7 +64,7 @@ const SidebarNav = props => {
           key={page.title}
         >
           <Button
-            activeClassName={classes.active}
+            activeClassName={location.pathname === page.href ? classes.active : ''}
             className={classes.button}
             component={CustomRouterLink}
             to={page.href}
