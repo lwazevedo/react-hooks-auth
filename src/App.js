@@ -20,7 +20,7 @@ function App() {
             <Switch>
               <PrivateRouter exact path='/' component={Home} />
               <PrivateRouter exact path='/dash' component={Dash} />
-              <Route path="*" component={NoMatch} />
+              {/* <Route path="*" component={NoMatch} /> */}
             </Switch>
           </Container>
         </Switch>
