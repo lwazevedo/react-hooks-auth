@@ -1,25 +1,7 @@
-import React, { useContext } from 'react';
-import { useHistory } from "react-router-dom";
+import React from 'react';
 
-import { Button } from '@material-ui/core'
 
-import AuthContext from '../../../context/authContext/AuthContext';
-
-const Home = () => {
-  const { logout } = useContext(AuthContext);
-  const history = useHistory();
-
-  const onLogout = () => {
-    logout();
-    history.push('/login');
-  }
-  return (
-    <>
-      <p>HOME</p>
-      <Button variant="contained" color="primary" onClick={onLogout}>
-        logout
-      </Button>
-    </>
-  )
-};
+const Home = () => (
+  <p>HOME</p>
+);
 export default Home;

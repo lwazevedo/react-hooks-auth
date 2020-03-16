@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link as RouterLink, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Hidden, IconButton } from '@material-ui/core';
@@ -7,7 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 // import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
-// import logoSVG from './../../images/logoTopBar.png'
+
+import AuthContext from '../../context/authContext/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,7 +24,14 @@ const useStyles = makeStyles(theme => ({
 
 const TopBar = (props) => {
   const { className, onSidebarOpen, ...rest } = props;
+  const { logout } = useContext(AuthContext);
   const classes = useStyles();
+  const history = useHistory();
+
+  const onLogout = () => {
+    logout();
+    history.push('/login');
+  }
   return (
     <AppBar
       {...rest}
@@ -50,6 +58,7 @@ const TopBar = (props) => {
           <IconButton
             className={classes.signOutButton}
             color="inherit"
+            onClick={onLogout}
           >
             <InputIcon />
           </IconButton>
