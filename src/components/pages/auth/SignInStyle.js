@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import loginImage from '../../../images/loginLeft.png';
+
 
 
 const SignInStyle = makeStyles(theme => ({
@@ -7,7 +7,7 @@ const SignInStyle = makeStyles(theme => ({
     height: '100vh',
   },
   image: {
-    backgroundImage: `url(${loginImage})`,
+    backgroundImage: `url(img/logos/loginLeft.png)`,
     backgroundRepeat: 'no-repeat',
     backgroundColor:
       theme.palette.type === 'dark' ? theme.palette.grey[900] : theme.palette.grey[50],

@@ -7,6 +7,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 // import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 
+// import logoSVG from './../../images/logoTopBar.png'
+
 const useStyles = makeStyles(theme => ({
   root: {
     boxShadow: 'none'
@@ -29,11 +31,10 @@ const TopBar = (props) => {
     >
       <Toolbar>
         <RouterLink to="/">
-          {/* <img
+          <img
             alt="Logo"
-            src="/images/logos/logo--white.svg"
-          /> */}
-          LOGO
+            src='img/logos/logoTopBar.png'
+          />
         </RouterLink>
         <div className={classes.flexGrow} />
         <Hidden mdDown>
