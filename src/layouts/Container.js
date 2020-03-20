@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { useMediaQuery } from '@material-ui/core';
@@ -7,6 +7,7 @@ import { useMediaQuery } from '@material-ui/core';
 
 import TopBar from './components/TopBar';
 import SideBar from './components/SideBar/SideBar';
+import AuthContext from '../context/authContext/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -29,7 +30,7 @@ const Container = (props) => {
   const { children } = props;
   const classes = useStyles();
   const theme = useTheme();
-
+  const { user } = useContext(AuthContext);
   const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
     defaultMatches: true
   });
@@ -52,10 +53,11 @@ const Container = (props) => {
       [classes.root]: true,
       [classes.shiftContent]: isDesktop
     })}>
-      <TopBar onSidebarOpen={handleSidebarOpen} />
+      <TopBar onSidebarOpen={handleSidebarOpen} user={user} />
       <SideBar onClose={handleSidebarClose}
         open={shouldOpenSidebar}
-        variant={isDesktop ? 'persistent' : 'temporary'} />
+        variant={isDesktop ? 'persistent' : 'temporary'}
+        user={user} />
       <main className={classes.content}>
         {children}
       </main>

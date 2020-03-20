@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import { Divider, Drawer } from '@material-ui/core';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import { Dashboard as DashboardIcon, AccountBox as AccountBoxIcon, ShoppingBasket as ShoppingBasketIcon } from '@material-ui/icons';
+import routes from '../../../components/routes'
 
 import { Profile, SidebarNav } from './components';
 
@@ -32,11 +32,11 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Sidebar = props => {
-  const { open, variant, onClose, className, ...rest } = props;
+  const { open, variant, onClose, className, user, ...rest } = props;
 
   const classes = useStyles();
 
-  const pages = [
+  const pagesStatic = [
     {
       title: 'Dashboard',
       href: '/dash',
@@ -46,9 +46,16 @@ const Sidebar = props => {
       title: 'Home',
       href: '/',
       icon: <AccountBoxIcon />
+    },
+    {
+      title: 'Products',
+      href: '/products',
+      icon: <ShoppingBasketIcon />
     }
   ];
 
+  const pages = pagesStatic.filter(p => routes.find(r => r.path === p.href && r.roles.includes(user.roles)));
+  
   return (
     <Drawer
       anchor="left"
